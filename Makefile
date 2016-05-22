@@ -11,7 +11,7 @@ static_ruby_headers = $(patsubst %,$(build)/%, $(patsubst lib/%.rb,%.h, $(wildca
 .SECONDARY: $(static_ruby_headers) $(objects)
 objects += $(mruby_static_lib)
 
-LDFLAGS=-lm
+LDFLAGS=-lm $(shell (uname | grep -q Darwin || echo -static) )
 
 CFLAGS=-Imruby/include -I$(build)
 
@@ -21,7 +21,7 @@ docker-build: $(target)
 	docker build .
 
 $(target): $(build) $(objects)
-	$(CC) -static -o $@ $(objects) $(LDFLAGS)
+	$(CC) -o $@ $(objects) $(LDFLAGS)
 
 $(build)/test.yml: $(target) .mirbrc
 	$(target) > $@
