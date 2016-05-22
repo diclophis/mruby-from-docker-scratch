@@ -15,7 +15,10 @@ LDFLAGS=-lm
 
 CFLAGS=-Imruby/include -I$(build)
 
-$(shell mkdir $(build))
+$(shell mkdir -p $(build))
+
+docker-build: $(target)
+	docker build .
 
 $(target): $(build) $(objects)
 	$(CC) -static -o $@ $(objects) $(LDFLAGS)

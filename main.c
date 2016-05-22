@@ -2,19 +2,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <sys/errno.h>
 
 
 #include <mruby.h>
@@ -61,10 +48,6 @@ int main(int argc, char** argv) {
   }
 
   mrb_define_global_const(mrb, "ARGV", args);
-
-  //mrb_define_method(mrb, mrb->object_class, "business", business, MRB_ARGS_BLOCK());
-
-  //eval_static_libs(mrb, detective, investigation, hterm, NULL);
 
   mrbc_context *detective_file = mrbc_context_new(mrb);
   mrbc_filename(mrb, detective_file, ".mirbrc");
