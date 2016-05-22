@@ -1,1 +1,7 @@
-raise "running ruby!"
+i = 0
+
+42.times do
+  i += 1
+end
+
+raise "running mruby #{i}"

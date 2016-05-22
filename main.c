@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
   FILE *f = 0;
   f = fopen(".mirbrc", "r");
   if (0 == f) {
+    fprintf(stderr,"could not find .mirbrc\n");
     return 1;
   }
 

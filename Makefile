@@ -1,7 +1,7 @@
 # Makefile
 
 product=mirbrc
-build=/tmp/$(product)-build
+build=build/$(product)-build
 target=$(build)/$(product)
 mruby_static_lib=mruby/build/host/lib/libmruby.a
 mrbc=mruby/bin/mrbc
@@ -11,17 +11,21 @@ static_ruby_headers = $(patsubst %,$(build)/%, $(patsubst lib/%.rb,%.h, $(wildca
 .SECONDARY: $(static_ruby_headers) $(objects)
 objects += $(mruby_static_lib)
 
+LDFLAGS=-lm
+
 CFLAGS=-Imruby/include -I$(build)
 
+$(shell mkdir $(build))
+
 $(target): $(build) $(objects)
-	$(CC) $(LDFLAGS) -o $@ $(objects)
+	$(CC) -static -o $@ $(objects) $(LDFLAGS)
 
 $(build)/test.yml: $(target) .mirbrc
 	$(target) > $@
 
 clean:
 	cd mruby && make clean
-	touch $(build) && rm -R $(build)
+	rm -R $(build)
 
 $(build):
 	mkdir -p $(build)

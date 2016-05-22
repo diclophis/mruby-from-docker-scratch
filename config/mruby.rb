@@ -7,4 +7,8 @@ MRuby::Build.new do |conf|
   conf.bins = ["mrbc", "mirb"]
 
   conf.gem :core => "mruby-bin-mirb"
+
+  conf.cc do |cc|
+    cc.flags = [ENV['CFLAGS'], "-lm"].join(" ")
+  end
 end
