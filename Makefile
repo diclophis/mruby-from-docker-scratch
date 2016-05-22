@@ -1,6 +1,6 @@
 # Makefile
 
-product=detective-agency
+product=mirbrc
 build=/tmp/$(product)-build
 target=$(build)/$(product)
 mruby_static_lib=mruby/build/host/lib/libmruby.a
@@ -16,7 +16,7 @@ CFLAGS=-Imruby/include -I$(build)
 $(target): $(build) $(objects)
 	$(CC) $(LDFLAGS) -o $@ $(objects)
 
-$(build)/test.yml: $(target) Detectivefile
+$(build)/test.yml: $(target) .mirbrc
 	$(target) > $@
 
 clean:
