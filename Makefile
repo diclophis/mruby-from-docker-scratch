@@ -18,7 +18,7 @@ CFLAGS=-Imruby/include -I$(build)
 $(shell mkdir -p $(build))
 
 docker-build: $(target)
-	docker build .
+	(echo $(LDFLAGS) | grep -q static && docker build .) || echo you must build on linux
 
 $(target): $(build) $(objects)
 	$(CC) -o $@ $(objects) $(LDFLAGS)
