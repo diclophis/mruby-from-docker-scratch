@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-
-
 #include <mruby.h>
 #include <mruby/array.h>
 #include <mruby/irep.h>
